@@ -1,5 +1,3 @@
-#!/Users/gabro/.rvm/rubies/ruby-1.9.3-p448/bin/ruby
-
 require 'mechanize'
 require 'treat'
 include Treat::Core::DSL
