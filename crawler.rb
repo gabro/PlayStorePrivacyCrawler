@@ -5,6 +5,22 @@ require 'benchmark'
 require 'colorize'
 require 'timeout'
 
+
+# Courtesy from http://stackoverflow.com/questions/2108727/which-in-ruby-checking-if-program-exists-in-path-from-ruby
+# Cross-platform way of finding an executable in the $PATH.
+#
+#   which('ruby') #=> /usr/bin/ruby
+def which(cmd)
+  exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
+  ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|
+    exts.each { |ext|
+      exe = File.join(path, "#{cmd}#{ext}")
+      return exe if File.executable? exe
+    }
+  end
+  return nil
+end
+
 checkmark = "\u2713".green
 xmark = "\u2718".red
 circle = "\u25CB".white
@@ -77,13 +93,23 @@ time = Benchmark.realtime do
 	time = "(#{time} s)".cyan
 	puts "#{checkmark} Generated .dot file #{time}"
 
-	## Export .pdf file
-	time = Benchmark.realtime do
-		`dot -o #{package_name}.pdf -Tpdf #{package_name}.dot`
-	end
-	time = "(#{time} s)".cyan
-	puts "#{checkmark} Generated .pdf file #{time}"
+	if which('dot').nil?
+		dot = "dot".yellow
+		puts "#{circle} Skipping .pdf generation as #{dot} is not installed"
+	else
+		## Export .pdf file
+		time = Benchmark.realtime do
+			`dot -o #{package_name}.pdf -Tpdf #{package_name}.dot`
+		end
+		time = "(#{time} s)".cyan
+		puts "#{checkmark} Generated .pdf file #{time}"
 
-	## Open .pdf file
-	`open #{package_name}.pdf`
+		## Open .pdf file
+		`open #{package_name}.pdf`
+	end
 end
+
+## Final stats
+puts "-----------------------------------------"
+time = "#{time} s".cyan
+puts "#{checkmark} Done! Total elapsed time: #{time}"
