@@ -77,25 +77,13 @@ time = Benchmark.realtime do
 	time = "(#{time} s)".cyan
 	puts "#{checkmark} Generated .dot file #{time}"
 
-
-	dot_path = `command -v foo`
-	if dot_path.empty?
-		dot = "dot".yellow
-		puts "#{circle} Skipping .pdf generation as #{dot} is not installed"
-	else
-		## Export .pdf file
-		time = Benchmark.realtime do
-			`dot -o #{package_name}.pdf -Tpdf #{package_name}.dot`
-		end
-		time = "(#{time} s)".cyan
-		puts "#{checkmark} Generated .pdf file #{time}"
-
-		## Open .pdf file
-		`open #{package_name}.pdf`
+	## Export .pdf file
+	time = Benchmark.realtime do
+		`dot -o #{package_name}.pdf -Tpdf #{package_name}.dot`
 	end
-end
+	time = "(#{time} s)".cyan
+	puts "#{checkmark} Generated .pdf file #{time}"
 
-## Final stats
-puts "-----------------------------------------"
-time = "#{time} s".cyan
-puts "#{checkmark} Done! Total elapsed time: #{time}"
+	## Open .pdf file
+	`open #{package_name}.pdf`
+end
