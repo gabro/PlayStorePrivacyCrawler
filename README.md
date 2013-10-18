@@ -7,7 +7,7 @@ Requirements
 ------------
 * ruby 1.9.3 (install using [rvm](https://rvm.io/rvm/install))
 * [Bundler](http://bundler.io/#getting-started)
-* (Optional) [Graphviz](http://www.graphviz.org/Download..php)
+* [Graphviz](http://www.graphviz.org/Download..php) (__Optional__: for generating a pdf from the dot file) 
     * On OSX:
         ```
         brew install graphviz
