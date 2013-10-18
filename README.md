@@ -11,8 +11,7 @@ Requirements
 Install
 -------
 ```
-git clone https://github.com/Gabro/PlayStorePrivacyCrawler.git
-cd PlayStorePrivacyCrawler
+git clone https://github.com/Gabro/PlayStorePrivacyCrawler.git ; cd PlayStorePrivacyCrawler
 bundle install
 ```
 
