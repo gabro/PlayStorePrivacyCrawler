@@ -7,12 +7,18 @@ Requirements
 ------------
 * ruby 1.9.3 (install using [rvm](https://rvm.io/rvm/install))
 * [Bundler](http://bundler.io/#getting-started)
+* (Optional) [Graphviz](http://www.graphviz.org/Download..php)
+    * On OSX:
+        ```
+        brew install graphviz
+        ```
 
 Install
 -------
 ```
 git clone https://github.com/Gabro/PlayStorePrivacyCrawler.git ; cd PlayStorePrivacyCrawler
 bundle install
+brew install 
 ```
 
 Usage
